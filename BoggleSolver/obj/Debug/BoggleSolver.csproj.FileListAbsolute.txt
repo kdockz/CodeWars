@@ -1,0 +1,9 @@
+D:\Projects\CodeWars\BoggleSolver\bin\Debug\BoggleSolver.exe.config
+D:\Projects\CodeWars\BoggleSolver\bin\Debug\BoggleSolver.exe
+D:\Projects\CodeWars\BoggleSolver\bin\Debug\BoggleSolver.pdb
+D:\Projects\CodeWars\BoggleSolver\obj\Debug\BoggleSolver.csprojResolveAssemblyReference.cache
+D:\Projects\CodeWars\BoggleSolver\obj\Debug\BoggleSolver.frmBoggleBoardSolver.resources
+D:\Projects\CodeWars\BoggleSolver\obj\Debug\BoggleSolver.Properties.Resources.resources
+D:\Projects\CodeWars\BoggleSolver\obj\Debug\BoggleSolver.csproj.GenerateResource.Cache
+D:\Projects\CodeWars\BoggleSolver\obj\Debug\BoggleSolver.exe
+D:\Projects\CodeWars\BoggleSolver\obj\Debug\BoggleSolver.pdb

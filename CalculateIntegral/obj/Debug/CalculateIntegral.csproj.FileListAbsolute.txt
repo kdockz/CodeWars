@@ -1,0 +1,6 @@
+D:\Projects\CodeWars\CalculateIntegral\bin\Debug\CalculateIntegral.exe.config
+D:\Projects\CodeWars\CalculateIntegral\bin\Debug\CalculateIntegral.exe
+D:\Projects\CodeWars\CalculateIntegral\bin\Debug\CalculateIntegral.pdb
+D:\Projects\CodeWars\CalculateIntegral\obj\Debug\CalculateIntegral.exe
+D:\Projects\CodeWars\CalculateIntegral\obj\Debug\CalculateIntegral.pdb
+D:\Projects\CodeWars\CalculateIntegral\obj\Debug\CalculateIntegral.csprojResolveAssemblyReference.cache

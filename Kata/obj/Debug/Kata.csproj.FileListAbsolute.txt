@@ -3,3 +3,4 @@ D:\Projects\CodeWars\Kata\bin\Debug\Kata.exe
 D:\Projects\CodeWars\Kata\bin\Debug\Kata.pdb
 D:\Projects\CodeWars\Kata\obj\Debug\Kata.exe
 D:\Projects\CodeWars\Kata\obj\Debug\Kata.pdb
+D:\Projects\CodeWars\Kata\obj\Debug\Kata.csprojResolveAssemblyReference.cache

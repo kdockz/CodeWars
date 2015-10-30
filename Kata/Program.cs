@@ -11,7 +11,9 @@ namespace Kata
         static void Main(string[] args)
         {
 
-            Console.WriteLine(Numbers.IsSquare(9));
+            //Console.WriteLine(Numbers.IsSquare(9));
+
+            Console.WriteLine(Series.SeriesNthSum(5));
             
         }
     }

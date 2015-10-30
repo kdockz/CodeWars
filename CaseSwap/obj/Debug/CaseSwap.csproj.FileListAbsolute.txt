@@ -1,0 +1,5 @@
+D:\Projects\CodeWars\CaseSwap\bin\Debug\CaseSwap.exe.config
+D:\Projects\CodeWars\CaseSwap\bin\Debug\CaseSwap.exe
+D:\Projects\CodeWars\CaseSwap\bin\Debug\CaseSwap.pdb
+D:\Projects\CodeWars\CaseSwap\obj\Debug\CaseSwap.exe
+D:\Projects\CodeWars\CaseSwap\obj\Debug\CaseSwap.pdb

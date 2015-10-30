@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoggleSolver", "BoggleSolve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaseSwap", "CaseSwap\CaseSwap.csproj", "{7EF99267-7E83-4A2B-9448-EC66F008EB08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kata", "Kata\Kata.csproj", "{5C930149-D28E-4BD2-8FF6-5152F666D16C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7EF99267-7E83-4A2B-9448-EC66F008EB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EF99267-7E83-4A2B-9448-EC66F008EB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EF99267-7E83-4A2B-9448-EC66F008EB08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C930149-D28E-4BD2-8FF6-5152F666D16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C930149-D28E-4BD2-8FF6-5152F666D16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C930149-D28E-4BD2-8FF6-5152F666D16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C930149-D28E-4BD2-8FF6-5152F666D16C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

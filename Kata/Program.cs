@@ -4,19 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaseSwap
+namespace Kata
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string test = "test";
 
-            Console.WriteLine("Test");
-
-
+            Console.WriteLine(Numbers.IsSquare(9));
+            
         }
-
     }
-
 }

@@ -11,17 +11,16 @@ namespace Kata
     {
         public static string SeriesNthSum(int n)
         {
-
-            decimal sum = 0;     
+            double sum = 0;     
 
             for (int i = 0; i < n; i++)
             {
-                sum += (1.00m / ((i * 3) + 1));
-            
+                sum += (1d / ((i * 3d) + 1d));
             }
 
-            return Math.Round(sum, 2).ToString();
-            //return sum.ToString("0.00");
+            //return Math.Round(sum, 2).ToString();
+            //return String.Format("{0:0.00}", sum);
+            return sum.ToString("0.00");
         }
     }
 }

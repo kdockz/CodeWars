@@ -41,6 +41,7 @@ local.properties
 *.user
 *.sln.docstates
 
+
 # Build results
 
 [Dd]ebug/
@@ -85,6 +86,7 @@ ipch/
 *.opensdf
 *.sdf
 *.cachefile
+*.cache
 
 # Visual Studio profiler
 *.psess

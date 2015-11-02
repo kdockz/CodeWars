@@ -7,6 +7,14 @@ namespace Kata
 {
     class Numbers
     {
+
+
+        /// <summary>
+        /// Determines i a given number n is a square number.
+        /// That is, if n is the product of some number m times itself.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns>boolean</returns>
         public static bool IsSquare(int n)
         {
             if (n < 0)
@@ -26,6 +34,7 @@ namespace Kata
                         return true;
                     }
                 }
+
                 return false;
             }
         }
@@ -34,7 +43,12 @@ namespace Kata
         {
            return IsEven((long)n);
         }
-
+        /// <summary>
+        /// Determines if a number is even.
+        /// Uses bit math to determine if the first bit for a given number n is not set. (i.e. equal to zero)
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns>boolean</returns>
         public static bool IsEven(long n)
         {
             return ((n & 1) == 0);
@@ -117,9 +131,7 @@ namespace Kata
                 yield return cur;
             }
 
-
             yield break;
-
         }
 
         public static IEnumerator<long> Range(long n)
@@ -132,6 +144,19 @@ namespace Kata
             }
 
             yield break;
+        }
+
+        public static uint SumOfMultiples(uint n, uint multiple)
+        {
+            if (n == 0)
+            {
+                return 0;
+            }
+
+            var num = (n - 1) / multiple;
+            var sum = (((1 + num) * num) / 2) * multiple;
+
+            return sum;
         }
     }
 }

@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 
 namespace Kata
 {
     class Numbers
     {
+
+
+        /// <summary>
+        /// Determines i a given number n is a square number.
+        /// That is, if n is the product of some number m times itself.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns>boolean</returns>
         public static bool IsSquare(int n)
         {
-
-            //Your code goes here!
             if (n < 0)
             {
                 return false;
@@ -29,30 +34,35 @@ namespace Kata
                         return true;
                     }
                 }
+
                 return false;
             }
         }
 
-        public static long CountOddPentaFib(long n)
+        public static bool IsEven(int n)
         {
+           return IsEven((long)n);
+        }
+        /// <summary>
+        /// Determines if a number is even.
+        /// Uses bit math to determine if the first bit for a given number n is not set. (i.e. equal to zero)
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns>boolean</returns>
+        public static bool IsEven(long n)
+        {
+            return ((n & 1) == 0);
+            //return (n % 2 == 0);
+        }
 
-            List<long> oddTerms = new List<long>();
-            List<long> sequence = new List<long>();
-            long sum = 0;
+        public static long CountOddPentaFibonacci(long n)
+        {
+            return (long)((n - 1) / 6) + (long)((n - 2) / 6) + 1;
+        }
 
-            if (n == 0)
-            {
-                return 0;
-            }
-
-            for (long i = n-5; i < n; i++)
-            {
-                sum += CountOddPentaFib(i);
-            }
-
-            Console.WriteLine(sum);
-
-            return sum;
+        public static long CountOddFibonacci(long n, int previousSize)
+        {
+            return (Fibonacci(n, previousSize).Where(num => !num.IsEven)).Distinct().Count();
         }
 
         public static IEnumerable<long> Fibonacci(long n)
@@ -80,26 +90,73 @@ namespace Kata
             yield break;
         }
 
-        public static IEnumerable<long> Pentanacci(long n)
+        public static IEnumerable<BigInteger> Fibonacci(long n, int previousSize)
         {
+            BigInteger[] previousN = new BigInteger[previousSize];
+            previousN[1] = 1;
+            BigInteger cur;
+            
+            for (int i = 0; (i < previousSize) && (i <= n); i++)
+            {
+                //Base case
+                if (i <= 0)
+                {
+                    yield return 0;
+                }
+                //Base case
+                else if (i == 1)
+                {
+                    yield return 1;
+                }
+                else
+                {
+                    cur = previousN.Aggregate<BigInteger>(BigInteger.Add);
+                    previousN[i] = cur;
 
-            List<long> prev = new List<long>();
+                    yield return cur;
+                }
+            }
 
-            return prev;
+            for (int i = previousSize; i <= n; i++)
+            {
+                cur = previousN.Aggregate<BigInteger>(BigInteger.Add);
 
+                for (int x = 1; x < previousSize; x++)
+                {
+                    previousN[x - 1] = previousN[x];
+                }
+
+                previousN[previousSize - 1] = cur;
+
+                yield return cur;
+            }
+
+            yield break;
         }
 
         public static IEnumerator<long> Range(long n)
         {
-
             var number = 0;
+
             while (number != n)
             {
                 yield return number++;
             }
 
             yield break;
+        }
 
+        public static uint SumOfMultiples(uint n, uint multiple)
+        {
+            if (n == 0)
+            {
+                return 0;
+            }
+
+            var num = (n - 1) / multiple;
+            var sum = (((1 + num) * num) / 2) * multiple;
+
+            return sum;
         }
     }
 }

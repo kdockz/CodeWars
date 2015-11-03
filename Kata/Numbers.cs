@@ -43,6 +43,7 @@ namespace Kata
         {
            return IsEven((long)n);
         }
+
         /// <summary>
         /// Determines if a number is even.
         /// Uses bit math to determine if the first bit for a given number n is not set. (i.e. equal to zero)
@@ -52,7 +53,6 @@ namespace Kata
         public static bool IsEven(long n)
         {
             return ((n & 1) == 0);
-            //return (n % 2 == 0);
         }
 
         public static long CountOddPentaFibonacci(long n)
@@ -62,88 +62,70 @@ namespace Kata
 
         public static long CountOddFibonacci(long n, int previousSize)
         {
-            return (Fibonacci(n, previousSize).Where(num => !num.IsEven)).Distinct().Count();
+            return FibonacciUpToNth(n, previousSize).Where(num => !IsEven(num)).Distinct().Count();
         }
 
-        public static IEnumerable<long> Fibonacci(long n)
+        public static long SumEvenFibonacci(long n, int previousSize)
         {
-            long prev = 0;
+            return FibonacciByValue(n, previousSize).Where(num => IsEven(num)).Sum();
+        }
+
+        public static IEnumerable<long> FibonacciUpToNth(long n, int previousSize)
+        {
+            var iter = Fibonacci(previousSize);
+
+            for (int i = 0; i < n; i++)
+            {
+                iter.MoveNext();
+                yield return iter.Current;
+            }
+
+            yield break;
+        }
+
+        public static IEnumerable<long> FibonacciByValue(long n, int previousSize)
+        {
+            var iter = Fibonacci(previousSize);
+
+            while (iter.Current <= n)
+            {
+                iter.MoveNext();
+                if (iter.Current <= n)
+                {
+                    yield return iter.Current;
+                }
+            }
+
+            yield break;
+        }
+
+        public static IEnumerator<long> Fibonacci(long previousSize)
+        {
+            Queue<long> previousNqueue = new Queue<long>();
+            previousNqueue.Enqueue(0);
             long cur = 0;
-            long val = 0;
 
-            for (int i = 0; i <= n; i++)
+            while (true)
             {
-                if (i == 1)
+                yield return cur;
+
+                //Base case
+                if (cur <= 0)
                 {
-                    cur += i;
+                    cur += 1;
+                    previousNqueue.Enqueue(cur);
                 }
                 else
                 {
-                    val = prev + cur;
-                    prev = cur;
-                    cur = val;
-                }
+                    cur = previousNqueue.Sum();
+                    previousNqueue.Enqueue(cur);
 
-                yield return cur;
-            }
-
-            yield break;
-        }
-
-        public static IEnumerable<BigInteger> Fibonacci(long n, int previousSize)
-        {
-            BigInteger[] previousN = new BigInteger[previousSize];
-            previousN[1] = 1;
-            BigInteger cur;
-            
-            for (int i = 0; (i < previousSize) && (i <= n); i++)
-            {
-                //Base case
-                if (i <= 0)
-                {
-                    yield return 0;
-                }
-                //Base case
-                else if (i == 1)
-                {
-                    yield return 1;
-                }
-                else
-                {
-                    cur = previousN.Aggregate<BigInteger>(BigInteger.Add);
-                    previousN[i] = cur;
-
-                    yield return cur;
+                    if (previousNqueue.Count > previousSize)
+                    {
+                        previousNqueue.Dequeue();
+                    }
                 }
             }
-
-            for (int i = previousSize; i <= n; i++)
-            {
-                cur = previousN.Aggregate<BigInteger>(BigInteger.Add);
-
-                for (int x = 1; x < previousSize; x++)
-                {
-                    previousN[x - 1] = previousN[x];
-                }
-
-                previousN[previousSize - 1] = cur;
-
-                yield return cur;
-            }
-
-            yield break;
-        }
-
-        public static IEnumerator<long> Range(long n)
-        {
-            var number = 0;
-
-            while (number != n)
-            {
-                yield return number++;
-            }
-
-            yield break;
         }
 
         public static uint SumOfMultiples(uint n, uint multiple)

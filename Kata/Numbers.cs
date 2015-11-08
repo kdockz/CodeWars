@@ -140,5 +140,119 @@ namespace Kata
 
             return sum;
         }
+
+        public static List<long> Factors(long n)
+        {
+            List<long> factors = new List<long>();
+
+            for (int i = 1; i * i <= n; i++)
+            {
+                if (n % i == 0)
+                {
+                    factors.Add(i);
+                    factors.Add(n / i);
+                    
+                }
+            }
+
+            factors.Sort();
+
+            return factors;
+        }
+
+        public static List<long[]> FactorPairs(long n)
+        {
+            List<long[]> factors = new List<long[]>();
+            
+
+            for (int i = 1; i * i <= n; i++)
+            {
+                if (n % i == 0)
+                {
+                    long[] pair = new long[2];
+                    pair[0] = i;
+                    pair[1] = n / i;
+                    factors.Add(pair);
+                }
+            }
+
+            return factors;
+        }
+
+        public static List<long> PrimeFactors(long n)
+        {
+            List<long> primeFactors = new List<long>();
+
+            for (int i = 2; i*i <= n; i++)
+            {
+                while (n % i == 0)
+                {
+                    n = n / i;
+                    primeFactors.Add(i);
+                }
+            }
+
+            primeFactors.Add(n);
+
+            return primeFactors;
+        }
+
+        public static long LargestPrimeFactor(long n)
+        {
+            List<long> primeFactors = PrimeFactors(n);
+
+            return primeFactors.Max();
+        }
+
+        public static IEnumerable<string> DescendingPalindromes(long digitSize)
+        {
+            long maxNum = 0;
+            for (int i = 0; i < digitSize; i++)
+            {
+                maxNum = Convert.ToInt32(string.Format("{0}{1}", maxNum, 9));
+            }
+            Console.WriteLine("MaxNum: {0}", maxNum);
+
+            var maxProduct = maxNum * maxNum;
+            Console.WriteLine("MaxProduct: {0}", maxProduct);
+
+            long validDigits = (long)Math.Ceiling(maxProduct.ToString().Length / 2d);
+            Console.WriteLine("ValidDigits: {0}", validDigits);
+
+            List<int> palindrome = new List<int>();
+
+            for (long i = maxNum; i > 0; i--)
+            {
+                var num = ToDigitList(i);
+                palindrome.AddRange(num);
+                num.Reverse();
+                palindrome.AddRange(num);
+
+                Console.WriteLine(string.Join("", palindrome.ToArray()));
+                yield return string.Join("", palindrome.ToArray());
+
+                palindrome.Clear();
+            }
+
+            yield break;
+        }
+
+        public static List<int> ToDigitList(long n)
+        {
+            List<int> num = new List<int>();
+
+            while (n > 0)
+            {
+                int digit = (int)(n % 10);
+                num.Add(digit);
+                
+                n = n / 10;
+            }
+
+            num.Reverse();
+
+            return num;
+        }
+        
     }
 }

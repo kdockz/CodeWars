@@ -26,6 +26,14 @@ namespace Kata
             //Console.WriteLine(string.Join(" ", Numbers.FibonacciUpToNth(10, 2).ToArray()));
             //Console.WriteLine(string.Join(" ", Numbers.SumEvenFibonacci(4000000, 2)));
             //Console.WriteLine(string.Join(" ", Numbers.FibonacciByValue(4000000, 2).ToArray()));
+
+
+            //var pairs = Numbers.FactorPairs(30);
+            Numbers.DescendingPalindromes(3);
+            //Numbers.FactorPairs(1001).ForEach(delegate(long[] pair) { Console.WriteLine(string.Join(" ", pair)); });
+            //Console.WriteLine(string.Join(" ", Numbers.PrimeFactors(30).ToArray()));;
+            //Numbers.PrimeFactors(4000478);
+            //Numbers.PrimeFactors(600851475143);
         }
     }
 }

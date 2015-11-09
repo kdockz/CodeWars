@@ -2,15 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-
+using System.Diagnostics;
 namespace Kata
 {
-    class Numbers
+    public static class Numbers
     {
 
+        /// <summary>
+        /// Storing the powers of 10 into an array to assist with total runtime
+        /// of functions that need to access the powers of 10 regularly.
+        /// </summary>
+        private static long[] m_PowersOfTen = new long[] { 1,
+                                                           10,
+                                                           100,
+                                                           1000,
+                                                           10000,
+                                                           100000,
+                                                           1000000,
+                                                           10000000,
+                                                           100000000,
+                                                           1000000000,
+                                                           10000000000,
+                                                           100000000000,
+                                                           1000000000000,
+                                                           10000000000000,
+                                                           100000000000000,
+                                                           1000000000000000,
+                                                           10000000000000000,
+                                                           100000000000000000,
+                                                           1000000000000000000 };
 
         /// <summary>
-        /// Determines i a given number n is a square number.
+        /// Determines if a given number n is a square number.
         /// That is, if n is the product of some number m times itself.
         /// </summary>
         /// <param name="n"></param>
@@ -39,6 +62,11 @@ namespace Kata
             }
         }
 
+        /// <summary>
+        /// Helper function used to check if values of type long are even.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public static bool IsEven(int n)
         {
            return IsEven((long)n);
@@ -55,24 +83,51 @@ namespace Kata
             return ((n & 1) == 0);
         }
 
+        /// <summary>
+        /// Mathematical formula for counting the number of odd digits
+        /// in a fibonacci sequence where the next number is always 
+        /// determined by the sum of the previous 5 digits.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public static long CountOddPentaFibonacci(long n)
         {
             return (long)((n - 1) / 6) + (long)((n - 2) / 6) + 1;
         }
 
-        public static long CountOddFibonacci(long n, int previousSize)
+
+        /// <summary>
+        /// Counts the odd numbers in a given fibonacci sequence.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="previousN"></param>
+        /// <returns></returns>
+        public static long CountOddFibonacci(long n, int previousN)
         {
-            return FibonacciUpToNth(n, previousSize).Where(num => !IsEven(num)).Distinct().Count();
+            return FibonacciUpToNth(n, previousN).Where(num => !IsEven(num)).Distinct().Count();
         }
 
-        public static long SumEvenFibonacci(long n, int previousSize)
+        /// <summary>
+        /// Sum of the even numbers in a given fibonacci sequence.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="previousN"></param>
+        /// <returns></returns>
+        public static long SumEvenFibonacci(long n, int previousN)
         {
-            return FibonacciByValue(n, previousSize).Where(num => IsEven(num)).Sum();
+            return FibonacciByValue(n, previousN).Where(num => IsEven(num)).Sum();
         }
 
-        public static IEnumerable<long> FibonacciUpToNth(long n, int previousSize)
+        /// <summary>
+        /// Fibonacci sequence of size N where all values up to N
+        /// is the sum of the previousN numbers before it.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="previousN"></param>
+        /// <returns></returns>
+        public static IEnumerable<long> FibonacciUpToNth(long n, int previousN)
         {
-            var iter = Fibonacci(previousSize);
+            var iter = Fibonacci(previousN);
 
             for (int i = 0; i < n; i++)
             {
@@ -83,9 +138,17 @@ namespace Kata
             yield break;
         }
 
-        public static IEnumerable<long> FibonacciByValue(long n, int previousSize)
+        /// <summary>
+        /// Fibonacci sequence of an undetermined size where all values
+        /// are the sum of the previousN numbers before it and the last
+        /// digit in the sequence is equal to or less than N.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="previousN"></param>
+        /// <returns></returns>
+        public static IEnumerable<long> FibonacciByValue(long n, int previousN)
         {
-            var iter = Fibonacci(previousSize);
+            var iter = Fibonacci(previousN);
 
             while (iter.Current <= n)
             {
@@ -99,7 +162,14 @@ namespace Kata
             yield break;
         }
 
-        public static IEnumerator<long> Fibonacci(long previousSize)
+        /// <summary>
+        /// Helper function for Fibonacci that generates the numbers in a 
+        /// Fibonacci sequence where the next value is the sum of the previousN
+        /// numbers before it.
+        /// </summary>
+        /// <param name="previousN"></param>
+        /// <returns></returns>
+        public static IEnumerator<long> Fibonacci(long previousN)
         {
             Queue<long> previousNqueue = new Queue<long>();
             previousNqueue.Enqueue(0);
@@ -120,7 +190,7 @@ namespace Kata
                     cur = previousNqueue.Sum();
                     previousNqueue.Enqueue(cur);
 
-                    if (previousNqueue.Count > previousSize)
+                    if (previousNqueue.Count > previousN)
                     {
                         previousNqueue.Dequeue();
                     }
@@ -128,30 +198,21 @@ namespace Kata
             }
         }
 
-        public static uint SumOfMultiples(uint n, uint multiple)
+        /// <summary>
+        /// Returns all the factors of a given N.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static List<ulong> Factors(ulong n)
         {
-            if (n == 0)
-            {
-                return 0;
-            }
+            List<ulong> factors = new List<ulong>();
 
-            var num = (n - 1) / multiple;
-            var sum = (((1 + num) * num) / 2) * multiple;
-
-            return sum;
-        }
-
-        public static List<long> Factors(long n)
-        {
-            List<long> factors = new List<long>();
-
-            for (int i = 1; i * i <= n; i++)
+            for (ulong i = 1; i * i <= n; i++)
             {
                 if (n % i == 0)
                 {
                     factors.Add(i);
-                    factors.Add(n / i);
-                    
+                    factors.Add(n / i);      
                 }
             }
 
@@ -160,12 +221,18 @@ namespace Kata
             return factors;
         }
 
+        /// <summary>
+        /// Returns all the pairs of factors of a given N.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public static List<long[]> FactorPairs(long n)
         {
             List<long[]> factors = new List<long[]>();
-            
 
-            for (int i = 1; i * i <= n; i++)
+            factors.Add(new[] { 1, n });
+
+            for (long i = 2; i * i < n; i++)
             {
                 if (n % i == 0)
                 {
@@ -179,6 +246,11 @@ namespace Kata
             return factors;
         }
 
+        /// <summary>
+        /// Returns all the prime factors of a given N.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public static List<long> PrimeFactors(long n)
         {
             List<long> primeFactors = new List<long>();
@@ -197,6 +269,11 @@ namespace Kata
             return primeFactors;
         }
 
+        /// <summary>
+        /// Returns the largest prime factor of a given N.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public static long LargestPrimeFactor(long n)
         {
             List<long> primeFactors = PrimeFactors(n);
@@ -204,32 +281,117 @@ namespace Kata
             return primeFactors.Max();
         }
 
-        public static IEnumerable<string> DescendingPalindromes(long digitSize)
+        /// <summary>
+        /// Returns the smallest factor that is NOT 1 of a given N.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static long SmallestFactor(long n)
         {
-            long maxNum = 0;
-            for (int i = 0; i < digitSize; i++)
+            for (long i = 2; i * i <= n; i++)
             {
-                maxNum = Convert.ToInt32(string.Format("{0}{1}", maxNum, 9));
+                if (n % i == 0)
+                {
+                    return i;
+                }
             }
-            Console.WriteLine("MaxNum: {0}", maxNum);
 
-            var maxProduct = maxNum * maxNum;
-            Console.WriteLine("MaxProduct: {0}", maxProduct);
+            return n;
+        }
 
-            long validDigits = (long)Math.Ceiling(maxProduct.ToString().Length / 2d);
-            Console.WriteLine("ValidDigits: {0}", validDigits);
+        /// <summary>
+        /// Calculates the smallest number in which 1 to N
+        /// are all factors of.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static ulong SmallestMultiple(long n)
+        {
+            ulong num = 1;
+            
+            for (int i = 1; i <= n; i++)
+            {
+                if (num % (ulong)i != 0)
+                {
+                    num *= (ulong)SmallestFactor(i);
+                }
+            }
 
-            List<int> palindrome = new List<int>();
+            return num;
+        }
 
-            for (long i = maxNum; i > 0; i--)
+        /// <summary>
+        /// Finds the largest palindrome that has a factor pair 
+        /// with both factors of length pairSize.
+        /// </summary>
+        /// <param name="pairSize"></param>
+        /// <returns></returns>
+        public static long LargestPalindromeWithEqualSizePairs(int pairSize)
+        {
+            List<long[]> pairs;
+
+            foreach (var palindrome in DescendingPalindromes(pairSize*2))
+            {
+                pairs = FactorPairs(palindrome);
+
+                foreach (var pair in pairs)
+                {
+                    if (pair.All(num => num.ToString().Length == pairSize))
+                    {
+                        return palindrome;
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Finds all palindromes with a length equal to or less than the
+        /// given length and returns them in descending order.
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static IEnumerable<long> DescendingPalindromes(int length)
+        {
+            for (var j = length; j >= 2; j--)
+            {
+                foreach (var palindrome in PalindromesOfSize(j))
+                {
+                    yield return palindrome;
+                }
+            }
+
+            yield break;
+        }
+
+        /// <summary>
+        /// Finds all palindromes of a given length;
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static IEnumerable<long> PalindromesOfSize(int length)
+        {
+            int validDigits = (int)Math.Ceiling(length / 2d);
+            List<int> palindrome = new List<int>(length);
+            var oddLength = !IsEven(length);
+
+            for (long i = m_PowersOfTen[validDigits] - 1; i >= m_PowersOfTen[validDigits - 1]; i--)
             {
                 var num = ToDigitList(i);
-                palindrome.AddRange(num);
-                num.Reverse();
+
                 palindrome.AddRange(num);
 
-                Console.WriteLine(string.Join("", palindrome.ToArray()));
-                yield return string.Join("", palindrome.ToArray());
+                if (oddLength)
+                {
+                    num.RemoveAt(num.Count - 1);
+                }
+
+                num.Reverse();
+
+                palindrome.AddRange(num);
+
+                yield return palindrome.ToNumber();
 
                 palindrome.Clear();
             }
@@ -237,6 +399,11 @@ namespace Kata
             yield break;
         }
 
+        /// <summary>
+        /// Converts a long to a list of integers.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public static List<int> ToDigitList(long n)
         {
             List<int> num = new List<int>();
@@ -253,6 +420,22 @@ namespace Kata
 
             return num;
         }
-        
+
+        /// <summary>
+        /// Converts a list of integers to a long.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static long ToNumber(this List<int> n)
+        {
+            long num = 0;
+
+            for (int i = 0; i < n.Count; i++)
+            {
+                num += n[i] * m_PowersOfTen[i];
+            }
+
+            return num;
+        }
     }
 }

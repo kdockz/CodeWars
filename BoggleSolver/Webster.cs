@@ -22,7 +22,10 @@ namespace BoggleSolver
 
         public Webster(string file)
         {
-            var words = System.IO.File.ReadAllText(file).Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            var data = System.IO.File.ReadAllText(file);
+            var words = data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            //Console.WriteLine(data);
+            Console.WriteLine(words.Length);
 
             foreach (var word in words)
             {

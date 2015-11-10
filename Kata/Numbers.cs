@@ -356,7 +356,7 @@ namespace Kata
         {
             for (var j = length; j >= 2; j--)
             {
-                foreach (var palindrome in PalindromesOfSize(j))
+                foreach (var palindrome in PalindromesOfSizeN(j))
                 {
                     yield return palindrome;
                 }
@@ -370,7 +370,7 @@ namespace Kata
         /// </summary>
         /// <param name="length"></param>
         /// <returns></returns>
-        public static IEnumerable<long> PalindromesOfSize(int length)
+        public static IEnumerable<long> PalindromesOfSizeN(int length)
         {
             int validDigits = (int)Math.Ceiling(length / 2d);
             List<int> palindrome = new List<int>(length);
@@ -399,6 +399,50 @@ namespace Kata
             yield break;
         }
 
+        public static long NthPrimeNumber(long n)
+        {
+            var iter = PrimeNumber();
+
+            for (int i = 1; i <= n; i++)
+            {
+                iter.MoveNext();
+
+                if (i == n)
+                {
+                    return iter.Current;
+                }
+            }
+
+            return -1;
+        }
+
+        public static IEnumerator<long> PrimeNumber()
+        {
+            long num = 0;
+
+            while (true)
+            {
+                if (Factors((ulong)num).Count == 2)
+                {
+                    Console.WriteLine(num);
+                    yield return num;
+                }
+
+                if (num == 0)
+                {
+                    num += 2;
+                }
+                else if (num < 3)
+                {
+                    num += 1;
+                }
+                else
+                {
+                    num += 2;
+                }
+            }
+        }
+                     
         /// <summary>
         /// Converts a long to a list of integers.
         /// </summary>
@@ -426,9 +470,12 @@ namespace Kata
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
+        /// 9781797784617
         public static long ToNumber(this List<int> n)
         {
             long num = 0;
+
+            n.Reverse();
 
             for (int i = 0; i < n.Count; i++)
             {

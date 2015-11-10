@@ -63,5 +63,50 @@ namespace Kata
             }
             return sum;
         }
+
+        /// <summary>
+        /// Returns the largest product in a number of length N, where 
+        /// the adjacentNum adjacent digits have the largest product.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="adjacentNum"></param>
+        /// <returns></returns>
+        /// Go back and optimize code.
+        public static string LargestProduct(string n, int adjacentNum)
+        {
+            List<int> num = new List<int>();
+            ulong product = 1;
+            ulong largest = 0;
+            ulong digits = 0;
+            Console.WriteLine(n.Length);
+            for (int i = 0; i <= n.Length - adjacentNum; i++)
+            {
+                num = Numbers.ToDigitList(Int64.Parse(n.Substring(i, adjacentNum)));
+
+                if (num.ToString().Length < adjacentNum)
+                {
+                    product = 0;
+                }
+                else
+                {
+                    product = 1;
+                    //product = (ulong)(num.Aggregate((a, x) => a * x));
+                    foreach (var d in num)
+                    {
+                        product *= (ulong)d;
+                    }
+                }
+
+                if (product > largest)
+                {
+                    digits = (ulong)Numbers.ToNumber(num);
+                    largest = product;
+
+                    Console.WriteLine("Digits: {0}, Product: {1}", digits.ToString(), largest.ToString());
+                }
+            }
+
+            return largest.ToString();
+        }
     }
 }

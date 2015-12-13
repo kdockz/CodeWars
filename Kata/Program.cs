@@ -50,10 +50,21 @@ namespace Kata
             //Console.WriteLine(string.Join(" ", Numbers.Factors(20961806065200)));
             //Console.WriteLine(string.Join(" ", Numbers.Factors(105)));
             //Console.WriteLine(string.Join(" ", Numbers.Factors(9419588158802421600)));
-            for (int i = 1; i <= 46; i++)
-            {
-                //Console.WriteLine("{0}: {1}", i, string.Join(" ", Numbers.SmallestMultiple(i)));
-            }
+            //for (int i = 1; i <= 46; i++)
+            //{
+            //Console.WriteLine("{0}: {1}", i, string.Join(" ", Numbers.SmallestMultiple(i)));
+            //}
+
+            //Console.WriteLine(string.Join(" ", Numbers.PythagoreanTripleSum(1000)));
+            //Console.WriteLine(Numbers.PythagoreanTripleProduct(Numbers.PythagoreanTripleSum(1000)));
+
+            //Console.WriteLine(Numbers.NthPrimeNumber(3));
+            //Console.WriteLine(Numbers.PrimeNumberSum(2000000));
+
+            //Numbers.EulerGrid();
+            //Console.WriteLine(Numbers.SolveGrid(4));
+
+            Console.WriteLine(Series.FirstTriangleNumberWithFactorCount(500));
             sw.Stop();
 
             Console.WriteLine("Total time: {0}", sw.Elapsed);

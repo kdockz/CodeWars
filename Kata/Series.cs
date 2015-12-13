@@ -11,7 +11,7 @@ namespace Kata
     {
         public static string SeriesNthSum(int n)
         {
-            double sum = 0;     
+            double sum = 0;
 
             for (int i = 0; i < n; i++)
             {
@@ -47,7 +47,7 @@ namespace Kata
             return sum;
         }
 
-        public static ulong PowerOfSumToN(ulong n, ulong multiple, ulong power )
+        public static ulong PowerOfSumToN(ulong n, ulong multiple, ulong power)
         {
             var num = SumOfMultiplesToN(n, multiple);
 
@@ -78,7 +78,7 @@ namespace Kata
             ulong product = 1;
             ulong largest = 0;
             ulong digits = 0;
-            Console.WriteLine(n.Length);
+            //Console.WriteLine(n.Length);
             for (int i = 0; i <= n.Length - adjacentNum; i++)
             {
                 num = Numbers.ToDigitList(Int64.Parse(n.Substring(i, adjacentNum)));
@@ -102,11 +102,53 @@ namespace Kata
                     digits = (ulong)Numbers.ToNumber(num);
                     largest = product;
 
-                    Console.WriteLine("Digits: {0}, Product: {1}", digits.ToString(), largest.ToString());
+                    //Console.WriteLine("Digits: {0}, Product: {1}", digits.ToString(), largest.ToString());
                 }
             }
 
             return largest.ToString();
         }
+
+        public static ulong TriangleNumbers(int n)
+        {
+            ulong sum = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                sum += (ulong)i;
+            }
+
+            return sum;
+        }
+
+        public static IEnumerator<ulong> TriangleNumbers()
+        {
+            ulong sum = 0;
+            ulong cur = 1;
+            while (true)
+            {
+                sum += cur;
+                cur++;
+
+                yield return sum;
+            }
+
+            yield break;
+
+        }
+
+        public static ulong FirstTriangleNumberWithFactorCount(int n)
+        {
+            var iter = TriangleNumbers();
+            iter.MoveNext();
+
+            while (Numbers.Factors(iter.Current).Count < n)
+            {
+                iter.MoveNext();
+            }
+
+            return iter.Current;
+
+        }
+
     }
 }
